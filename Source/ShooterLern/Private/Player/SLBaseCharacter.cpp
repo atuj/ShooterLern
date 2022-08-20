@@ -11,8 +11,9 @@
 #include "Components/SLCharacterMovementComponent.h"
 #include "Components/SLHealthComponent.h"
 #include "Components/TextRenderComponent.h"
+#include "GameFramework/Controller.h"
 
-DEFINE_LOG_CATEGORY_STATIC(BaseCHaracterLog,All,All);
+DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter,All,All);
 
 // Sets default values
 ASLBaseCharacter::ASLBaseCharacter(const FObjectInitializer& ObjectInit):Super(ObjectInit.SetDefaultSubobjectClass<USLCharacterMovementComponent>(ACharacter::CharacterMovementComponentName))
@@ -41,19 +42,25 @@ void ASLBaseCharacter::BeginPlay()
 
 	check(HealthComponent);
 	check(HealthTextComponent);
-	
-	
+	check(GetCharacterMovement());
+
+	OnHealthChange(HealthComponent->GetHealth());
+	HealthComponent->OnDeath.AddUObject(this, &ASLBaseCharacter::OnDeath);
+	HealthComponent->OnHealthChange.AddUObject(this, &ASLBaseCharacter::OnHealthChange);
+
+	LandedDelegate.AddDynamic(this, &ASLBaseCharacter::OnGroundLanded);
 }
+
+void ASLBaseCharacter::OnHealthChange(float Health)
+{
+	HealthTextComponent->SetText(FText::FromString(FString::Printf(TEXT("%.0f"),Health)));
+}
+
 
 // Called every frame
 void ASLBaseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	const auto Health = HealthComponent->GetHealth();
-	HealthTextComponent->SetText(FText::FromString(FString::Printf(TEXT("%.0f"),Health)));
-	
-
 	//TakeDamage(0.05f,FDamageEvent {}, Controller, this);
 
 	
@@ -131,6 +138,32 @@ float ASLBaseCharacter::GetMovementDirection() const
 	return CrossProduct.IsZero()? Degrees: Degrees *FMath::Sign(CrossProduct.Z);
 }
 
+void ASLBaseCharacter::OnDeath()
+{
+	UE_LOG(LogBaseCharacter, Display, TEXT("Player %s is death"), *GetName());
+
+	PlayAnimMontage(DeathAnimMontage);
+
+	GetCharacterMovement()->DisableMovement();
+
+	SetLifeSpan(5.0f);
+
+	if(Controller)
+	{
+		Controller->ChangeState(NAME_Spectating);
+	}
+	
+}
+
+void ASLBaseCharacter::OnGroundLanded(const FHitResult& Hit)
+{
+	const auto FallVelocityZ = -GetCharacterMovement()->Velocity.Z;
+
+	if(FallVelocityZ < LandedDamageVelocity.X) return;
+
+	const auto FinalDamage = FMath::GetMappedRangeValueClamped(LandedDamageVelocity,LandedDamage,FallVelocityZ);
+	TakeDamage(FinalDamage, FDamageEvent{},nullptr,nullptr);
+}
 
 
 
