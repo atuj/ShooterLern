@@ -5,13 +5,7 @@
     <projectFile>Intermediate/ProjectFiles/ShooterLern.vcxproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a44d4b04-b7fe-4aaa-9c0e-d1d70e3482d9" name="Changes" comment="Добавление оружия">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ShooterLern/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ShooterLern/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ExternalContent/Characters/HeroTPP/HeroTPP.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ExternalContent/Characters/HeroTPP/HeroTPP.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Player/Animations/BS_LocomotionWalk2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Player/Animations/BS_LocomotionWalk2.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/ShooterLern/Private/Player/SLBaseCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ShooterLern/Private/Player/SLBaseCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/ShooterLern/Public/Player/SLBaseCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ShooterLern/Public/Player/SLBaseCharacter.h" afterDir="false" />
-    </list>
+    <list default="true" id="a44d4b04-b7fe-4aaa-9c0e-d1d70e3482d9" name="Changes" comment="Присоединение оружия персонажу" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -279,7 +273,7 @@
       <workItem from="1660978589225" duration="5146000" />
       <workItem from="1661010228337" duration="872000" />
       <workItem from="1661022556576" duration="1245000" />
-      <workItem from="1661071421193" duration="2258000" />
+      <workItem from="1661071421193" duration="2427000" />
     </task>
     <task id="LOCAL-00001" summary="Дамаг по персонажу и при падении&#10;Восстановление здоровья персонажа">
       <created>1660989485383</created>
@@ -295,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661071609355</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Присоединение оружия персонажу">
+      <created>1661075960993</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1661075960993</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,6 +320,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Дамаг по персонажу и при падении&#10;Восстановление здоровья персонажа" />
     <MESSAGE value="Добавление оружия" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавление оружия" />
+    <MESSAGE value="Присоединение оружия персонажу" />
+    <option name="LAST_COMMIT_MESSAGE" value="Присоединение оружия персонажу" />
   </component>
 </project>
