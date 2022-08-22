@@ -14,4 +14,10 @@ class SHOOTERLERN_API ASLGameHUD : public AHUD
 {
 	GENERATED_BODY()
 	
+public:
+	virtual void DrawHUD() override;
+private:
+	void DrawCrossHair();
+	
+	
 };

@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "SLBaseWeapon.generated.h"
 
+
+
 class USkeletalMeshComponent;
 
 UCLASS()
@@ -17,6 +19,9 @@ public:
 
 	ASLBaseWeapon();
 
+
+	virtual void Fire();
+	
 protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Components")
@@ -24,5 +29,5 @@ protected:
 
 	virtual void BeginPlay() override;
 
-
+	
 };

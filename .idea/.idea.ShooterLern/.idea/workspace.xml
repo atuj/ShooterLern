@@ -5,7 +5,23 @@
     <projectFile>Intermediate/ProjectFiles/ShooterLern.vcxproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a44d4b04-b7fe-4aaa-9c0e-d1d70e3482d9" name="Changes" comment="Присоединение оружия персонажу" />
+    <list default="true" id="a44d4b04-b7fe-4aaa-9c0e-d1d70e3482d9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Source/ShooterLern/Private/Components/SLWeaponsComponent.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/ShooterLern/Public/Components/SLWeaponsComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ShooterLern/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ShooterLern/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultInput.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultInput.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP_SLGameModeBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP_SLGameModeBase.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ExternalContent/Characters/HeroTPP/HeroTPP_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ExternalContent/Characters/HeroTPP/HeroTPP_Skeleton.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Player/BP_SLBaseCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Player/BP_SLBaseCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Maps/Minimal_Default.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Maps/Minimal_Default.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ShooterLern/Private/Player/SLBaseCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ShooterLern/Private/Player/SLBaseCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ShooterLern/Private/SLGameModeBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ShooterLern/Private/SLGameModeBase.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ShooterLern/Private/UI/SLGameHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ShooterLern/Private/UI/SLGameHUD.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ShooterLern/Private/Weapon/SLBaseWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ShooterLern/Private/Weapon/SLBaseWeapon.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ShooterLern/Public/Player/SLBaseCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ShooterLern/Public/Player/SLBaseCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ShooterLern/Public/UI/SLGameHUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ShooterLern/Public/UI/SLGameHUD.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ShooterLern/Public/Weapon/SLBaseWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ShooterLern/Public/Weapon/SLBaseWeapon.h" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,7 +29,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Source/ShooterLern/Private/Dev/SLIceDamageType.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/ShooterLern/Private/UI/SLGameHUD.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/ShooterLern/Public/Dev/SLIceDamageType.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/ShooterLern/Public/UI/SLGameHUD.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -273,7 +291,8 @@
       <workItem from="1660978589225" duration="5146000" />
       <workItem from="1661010228337" duration="872000" />
       <workItem from="1661022556576" duration="1245000" />
-      <workItem from="1661071421193" duration="2427000" />
+      <workItem from="1661071421193" duration="7253000" />
+      <workItem from="1661172340242" duration="6651000" />
     </task>
     <task id="LOCAL-00001" summary="Дамаг по персонажу и при падении&#10;Восстановление здоровья персонажа">
       <created>1660989485383</created>
@@ -296,7 +315,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661075960993</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Прицел оружия">
+      <created>1661077364178</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1661077364178</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,6 +347,7 @@
     <MESSAGE value="Дамаг по персонажу и при падении&#10;Восстановление здоровья персонажа" />
     <MESSAGE value="Добавление оружия" />
     <MESSAGE value="Присоединение оружия персонажу" />
-    <option name="LAST_COMMIT_MESSAGE" value="Присоединение оружия персонажу" />
+    <MESSAGE value="Прицел оружия" />
+    <option name="LAST_COMMIT_MESSAGE" value="Прицел оружия" />
   </component>
 </project>

@@ -12,7 +12,7 @@ class UCameraComponent;
 class USpringArmComponent;
 class USLHealthComponent;
 class UTextRenderComponent;
-class ASLBaseWeapon;
+class USLWeaponsComponent;
 
 UCLASS()
 class SHOOTERLERN_API ASLBaseCharacter : public ACharacter
@@ -36,6 +36,9 @@ protected:
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category="Components")
 	UTextRenderComponent* HealthTextComponent;
 
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category="Components")
+	USLWeaponsComponent* WeaponComponent;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Animation")
 	UAnimMontage* DeathAnimMontage;
 
@@ -45,8 +48,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Movement")
 	FVector2D LandedDamage = FVector2D(10.0f,100.0f);
 	
-	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
-	TSubclassOf<ASLBaseWeapon> WeaponClass;
+
 	
 	
 	
@@ -86,7 +88,7 @@ private:
 	UFUNCTION()
 	void OnGroundLanded(const FHitResult& Hit);
 
-	void SpawnWeapon();
+
 	
 	
 };

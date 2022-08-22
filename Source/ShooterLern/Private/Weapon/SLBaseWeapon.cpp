@@ -4,6 +4,7 @@
 #include "Weapon/SLBaseWeapon.h"
 #include "Components/SkeletalMeshComponent.h"
 
+DEFINE_LOG_CATEGORY_STATIC(LogBaseWeapon,All,All);
 
 ASLBaseWeapon::ASLBaseWeapon()
 {
@@ -20,6 +21,11 @@ void ASLBaseWeapon::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+void ASLBaseWeapon::Fire()
+{
+	UE_LOG(LogBaseWeapon, Display, TEXT("Fire"));
 }
 
 

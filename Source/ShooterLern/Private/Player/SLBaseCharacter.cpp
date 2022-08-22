@@ -2,6 +2,8 @@
 
 
 #include "Player/SLBaseCharacter.h"
+#include "Player/SLBaseCharacter.h"
+#include "Player/SLBaseCharacter.h"
 
 #include "Camera/CameraAnim.h"
 #include "Camera/CameraComponent.h"
@@ -12,7 +14,8 @@
 #include "Components/SLHealthComponent.h"
 #include "Components/TextRenderComponent.h"
 #include "GameFramework/Controller.h"
-#include "Weapon/SLBaseWeapon.h"
+#include "Components/SLWeaponsComponent.h"
+
 
 DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter,All,All);
 
@@ -25,6 +28,7 @@ ASLBaseCharacter::ASLBaseCharacter(const FObjectInitializer& ObjectInit):Super(O
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>("SpringArmComponent");
 	SpringArmComponent->SetupAttachment(GetRootComponent());
 	SpringArmComponent->bUsePawnControlRotation= true;
+	SpringArmComponent->SocketOffset = FVector(0.0f,100.0f,80.0f);
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>("CameraComponent");
 	CameraComponent->SetupAttachment(SpringArmComponent);
@@ -33,6 +37,9 @@ ASLBaseCharacter::ASLBaseCharacter(const FObjectInitializer& ObjectInit):Super(O
 
 	HealthTextComponent = CreateDefaultSubobject<UTextRenderComponent>("HealthTextComponent");
 	HealthTextComponent->SetupAttachment(GetRootComponent());
+	HealthTextComponent->SetOwnerNoSee(true);
+
+	WeaponComponent = CreateDefaultSubobject<USLWeaponsComponent>("WeaponComponent");
 
 }
 
@@ -51,7 +58,7 @@ void ASLBaseCharacter::BeginPlay()
 
 	LandedDelegate.AddDynamic(this, &ASLBaseCharacter::OnGroundLanded);
 
-	SpawnWeapon();
+
 }
 
 void ASLBaseCharacter::OnHealthChange(float Health)
@@ -84,6 +91,8 @@ void ASLBaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAction("Jump",IE_Pressed,this,&ASLBaseCharacter::Jump);
 	PlayerInputComponent->BindAction("Run",IE_Pressed,this,&ASLBaseCharacter::OnStartRunning);
 	PlayerInputComponent->BindAction("Run",IE_Released,this,&ASLBaseCharacter::OnStopRunning);
+
+	PlayerInputComponent->BindAction("Fire",IE_Pressed, WeaponComponent, &USLWeaponsComponent::Fire);
 	
 
 }
@@ -168,16 +177,6 @@ void ASLBaseCharacter::OnGroundLanded(const FHitResult& Hit)
 	TakeDamage(FinalDamage, FDamageEvent{},nullptr,nullptr);
 }
 
-void ASLBaseCharacter::SpawnWeapon()
-{
-	if(!GetWorld() ) return;
-	const auto Weapon = GetWorld()->SpawnActor<ASLBaseWeapon>(WeaponClass);
-	if(Weapon)
-	{
-		FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget,false);
-		Weapon->AttachToComponent(GetMesh(),AttachmentRules,"WeaponSocket");
-	}
-}
 
 
 
