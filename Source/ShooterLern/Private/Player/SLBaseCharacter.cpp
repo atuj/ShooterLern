@@ -13,6 +13,7 @@
 #include "Components/SLCharacterMovementComponent.h"
 #include "Components/SLHealthComponent.h"
 #include "Components/TextRenderComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "GameFramework/Controller.h"
 #include "Components/SLWeaponsComponent.h"
 
@@ -164,7 +165,7 @@ void ASLBaseCharacter::OnDeath()
 	{
 		Controller->ChangeState(NAME_Spectating);
 	}
-	
+	GetCapsuleComponent()->SetCollisionResponseToChannels(ECollisionResponse::ECR_Ignore);
 }
 
 void ASLBaseCharacter::OnGroundLanded(const FHitResult& Hit)
