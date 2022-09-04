@@ -28,9 +28,14 @@ void ASLBaseWeapon::BeginPlay()
 	
 }
 
-void ASLBaseWeapon::Fire()
+void ASLBaseWeapon::StartFire()
 {
 	MakeShot();
+	GetWorldTimerManager().SetTimer(ShotTimerHandle, this, &ASLBaseWeapon::MakeShot, TimerBetweenShots, true);
+}
+void ASLBaseWeapon::StopFire()
+{
+	GetWorldTimerManager().ClearTimer(ShotTimerHandle);
 }
 
 void ASLBaseWeapon::MakeShot()
@@ -85,7 +90,8 @@ bool ASLBaseWeapon::GetTraceData(FVector& TraceStart, FVector& TraceEnd) const
 	if(!GetPlayerViewPoint(ViewLocation,ViewRotation)) return false;
 
 	TraceStart = ViewLocation;								//SocketTransform.GetLocation();
-	const FVector ShootDirection = ViewRotation.Vector();	//SocketTransform.GetRotation().GetForwardVector();
+	const auto HalfRad = FMath::DegreesToRadians(BulletSprad);
+	const FVector ShootDirection = FMath::VRandCone( ViewRotation.Vector(), HalfRad);	//SocketTransform.GetRotation().GetForwardVector();
 	TraceEnd = TraceStart + ShootDirection * TraceMaxDistance;
 	return true;
 }

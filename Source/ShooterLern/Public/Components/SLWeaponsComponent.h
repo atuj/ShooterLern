@@ -16,7 +16,8 @@ class SHOOTERLERN_API USLWeaponsComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	USLWeaponsComponent();
-	void Fire();
+	void StartFire();
+	void StopFire();
 protected:
 
 	virtual void BeginPlay() override;

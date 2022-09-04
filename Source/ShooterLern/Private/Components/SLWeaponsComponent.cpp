@@ -25,11 +25,17 @@ void USLWeaponsComponent::BeginPlay()
 	
 }
 
-void USLWeaponsComponent::Fire()
+void USLWeaponsComponent::StartFire()
 {
 	if(!CurrentWeapon) return;
-	CurrentWeapon->Fire();
+	CurrentWeapon->StartFire();
 }
+void USLWeaponsComponent::StopFire()
+{
+	if(!CurrentWeapon) return;
+	CurrentWeapon->StopFire();
+}
+
 void USLWeaponsComponent::SpawnWeapon()
 {
 	if(!GetWorld() ) return;

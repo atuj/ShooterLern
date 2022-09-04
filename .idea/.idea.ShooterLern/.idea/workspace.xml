@@ -6,15 +6,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a44d4b04-b7fe-4aaa-9c0e-d1d70e3482d9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ShooterLern.sln.DotSettings.user" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Player/Animations/AO_BaseCharacter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ShooterLern/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ShooterLern/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetDown.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetDown.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetFwd.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetFwd.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetLeft.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetLeft.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetLeftDown.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetLeftDown.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetLeftUp.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetLeftUp.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetRight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetRight.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetRightDown.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetRightDown.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetRightUp.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetRightUp.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetUp.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ExternalContent/Animations/TTP_Animations/AimOffsetUp.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Player/Animations/ABP_BaseCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Player/Animations/ABP_BaseCharacter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Player/BP_SLBaseCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Player/BP_SLBaseCharacter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/StarterContent/Maps/Minimal_Default.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Maps/Minimal_Default.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Weapons/Rifle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Weapons/Rifle.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Weapons/Rifle_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Weapons/Rifle_Skeleton.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/ShooterLern/Private/Components/SLWeaponsComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ShooterLern/Private/Components/SLWeaponsComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/ShooterLern/Private/Player/SLBaseCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ShooterLern/Private/Player/SLBaseCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/ShooterLern/Private/Weapon/SLBaseWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ShooterLern/Private/Weapon/SLBaseWeapon.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/ShooterLern/Public/Components/SLWeaponsComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ShooterLern/Public/Components/SLWeaponsComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/ShooterLern/Public/Weapon/SLBaseWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/ShooterLern/Public/Weapon/SLBaseWeapon.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -294,6 +303,9 @@
       <workItem from="1661286909639" duration="5246000" />
       <workItem from="1661335842228" duration="2463000" />
       <workItem from="1661344737528" duration="6477000" />
+      <workItem from="1662222769933" duration="40000" />
+      <workItem from="1662298543936" duration="3403000" />
+      <workItem from="1662306969600" duration="798000" />
     </task>
     <task id="LOCAL-00001" summary="Дамаг по персонажу и при падении&#10;Восстановление здоровья персонажа">
       <created>1660989485383</created>

@@ -93,7 +93,8 @@ void ASLBaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAction("Run",IE_Pressed,this,&ASLBaseCharacter::OnStartRunning);
 	PlayerInputComponent->BindAction("Run",IE_Released,this,&ASLBaseCharacter::OnStopRunning);
 
-	PlayerInputComponent->BindAction("Fire",IE_Pressed, WeaponComponent, &USLWeaponsComponent::Fire);
+	PlayerInputComponent->BindAction("Fire",IE_Pressed, WeaponComponent, &USLWeaponsComponent::StartFire);
+	PlayerInputComponent->BindAction("Fire",IE_Released, WeaponComponent, &USLWeaponsComponent::StopFire);
 	
 
 }
