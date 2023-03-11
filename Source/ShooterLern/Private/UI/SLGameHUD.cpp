@@ -3,12 +3,23 @@
 
 #include "UI/SLGameHUD.h"
 #include "Engine/Canvas.h"
+#include "Blueprint/UserWidget.h"
 
 void ASLGameHUD::DrawHUD()
 {
 	Super:: DrawHUD();
 
-	DrawCrossHair();
+	//DrawCrossHair();
+}
+
+void ASLGameHUD::BeginPlay()
+{
+	Super::BeginPlay();
+	auto PlayerHUDWidget = CreateWidget(GetWorld(),PlayerHUDWidgetClass);
+	if(PlayerHUDWidget)
+	{
+		PlayerHUDWidget->AddToViewport();
+	}
 }
 
 void ASLGameHUD::DrawCrossHair()

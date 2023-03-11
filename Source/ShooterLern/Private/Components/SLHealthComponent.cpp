@@ -20,6 +20,8 @@ void USLHealthComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+	check(MaxHealth > 0);
+
 	SetHealth(MaxHealth);
 	
 	AActor* ComponentOwner = GetOwner();
@@ -53,7 +55,7 @@ void USLHealthComponent::HealUpdate()
 {
 	SetHealth(Health + HealModifier);
 
-	if(FMath::IsNearlyEqual(Health,MaxHealth) && GetWorld())
+	if(IsHealthFull() && GetWorld())
 	{
 		GetWorld()->GetTimerManager().ClearTimer(HealTimerHandle);
 	}
@@ -63,6 +65,18 @@ void USLHealthComponent::SetHealth(float NewHealth)
 {
 	Health = FMath::Clamp(NewHealth, 0.0f, MaxHealth);
 	OnHealthChange.Broadcast(Health);
+}
+
+bool USLHealthComponent::TryToAddHealth(float HealthAmount)
+{
+	if(IsDead() || IsHealthFull()) return false;
+	SetHealth(Health+HealthAmount);
+	return true;
+}
+
+bool USLHealthComponent::IsHealthFull() const
+{
+	return FMath::IsNearlyEqual(Health,MaxHealth);
 }
 
 

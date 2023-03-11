@@ -2,9 +2,6 @@
 
 
 #include "Player/SLBaseCharacter.h"
-#include "Player/SLBaseCharacter.h"
-#include "Player/SLBaseCharacter.h"
-
 #include "Camera/CameraAnim.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
@@ -18,22 +15,23 @@
 #include "Components/SLWeaponsComponent.h"
 
 
-DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter,All,All);
+DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter, All, All);
 
 // Sets default values
-ASLBaseCharacter::ASLBaseCharacter(const FObjectInitializer& ObjectInit):Super(ObjectInit.SetDefaultSubobjectClass<USLCharacterMovementComponent>(ACharacter::CharacterMovementComponentName))
+ASLBaseCharacter::ASLBaseCharacter(const FObjectInitializer& ObjectInit): Super(
+	ObjectInit.SetDefaultSubobjectClass<USLCharacterMovementComponent>(ACharacter::CharacterMovementComponentName))
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>("SpringArmComponent");
 	SpringArmComponent->SetupAttachment(GetRootComponent());
-	SpringArmComponent->bUsePawnControlRotation= true;
-	SpringArmComponent->SocketOffset = FVector(0.0f,100.0f,80.0f);
+	SpringArmComponent->bUsePawnControlRotation = true;
+	SpringArmComponent->SocketOffset = FVector(0.0f, 0.0f, 80.0f);
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>("CameraComponent");
 	CameraComponent->SetupAttachment(SpringArmComponent);
-	
+
 	HealthComponent = CreateDefaultSubobject<USLHealthComponent>("HealthComponent");
 
 	HealthTextComponent = CreateDefaultSubobject<UTextRenderComponent>("HealthTextComponent");
@@ -41,7 +39,6 @@ ASLBaseCharacter::ASLBaseCharacter(const FObjectInitializer& ObjectInit):Super(O
 	HealthTextComponent->SetOwnerNoSee(true);
 
 	WeaponComponent = CreateDefaultSubobject<USLWeaponsComponent>("WeaponComponent");
-
 }
 
 // Called when the game starts or when spawned
@@ -58,13 +55,11 @@ void ASLBaseCharacter::BeginPlay()
 	HealthComponent->OnHealthChange.AddUObject(this, &ASLBaseCharacter::OnHealthChange);
 
 	LandedDelegate.AddDynamic(this, &ASLBaseCharacter::OnGroundLanded);
-
-
 }
 
 void ASLBaseCharacter::OnHealthChange(float Health)
 {
-	HealthTextComponent->SetText(FText::FromString(FString::Printf(TEXT("%.0f"),Health)));
+	HealthTextComponent->SetText(FText::FromString(FString::Printf(TEXT("%.0f"), Health)));
 }
 
 
@@ -73,9 +68,6 @@ void ASLBaseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	//TakeDamage(0.05f,FDamageEvent {}, Controller, this);
-
-	
-
 }
 
 // Called to bind functionality to input
@@ -83,37 +75,36 @@ void ASLBaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	PlayerInputComponent->BindAxis("MoveForward",this,&ASLBaseCharacter::MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight",this,&ASLBaseCharacter::MoveRight);
+	PlayerInputComponent->BindAxis("MoveForward", this, &ASLBaseCharacter::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &ASLBaseCharacter::MoveRight);
 
-	PlayerInputComponent->BindAxis("LookUp",this,&ASLBaseCharacter::LookUp);
-	PlayerInputComponent->BindAxis("TurnAround",this,&ASLBaseCharacter::TurnAround);
+	PlayerInputComponent->BindAxis("LookUp", this, &ASLBaseCharacter::LookUp);
+	PlayerInputComponent->BindAxis("TurnAround", this, &ASLBaseCharacter::TurnAround);
 
-	PlayerInputComponent->BindAction("Jump",IE_Pressed,this,&ASLBaseCharacter::Jump);
-	PlayerInputComponent->BindAction("Run",IE_Pressed,this,&ASLBaseCharacter::OnStartRunning);
-	PlayerInputComponent->BindAction("Run",IE_Released,this,&ASLBaseCharacter::OnStopRunning);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ASLBaseCharacter::Jump);
+	PlayerInputComponent->BindAction("Run", IE_Pressed, this, &ASLBaseCharacter::OnStartRunning);
+	PlayerInputComponent->BindAction("Run", IE_Released, this, &ASLBaseCharacter::OnStopRunning);
 
-	PlayerInputComponent->BindAction("Fire",IE_Pressed, WeaponComponent, &USLWeaponsComponent::StartFire);
-	PlayerInputComponent->BindAction("Fire",IE_Released, WeaponComponent, &USLWeaponsComponent::StopFire);
-	
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, WeaponComponent, &USLWeaponsComponent::StartFire);
+	PlayerInputComponent->BindAction("Fire", IE_Released, WeaponComponent, &USLWeaponsComponent::StopFire);
 
+	PlayerInputComponent->BindAction("NextWeapon", IE_Pressed, WeaponComponent, &USLWeaponsComponent::NextWeapon);
+	PlayerInputComponent->BindAction("Reload", IE_Pressed, WeaponComponent, &USLWeaponsComponent::Reload);
 }
-
-
 
 
 void ASLBaseCharacter::MoveForward(float Amount)
 {
 	IsMovingForward = Amount > 0.0f;
-	if(Amount == 0.0f) return;
-	AddMovementInput(GetActorForwardVector(),Amount);
+	if (Amount == 0.0f) return;
+	AddMovementInput(GetActorForwardVector(), Amount);
 }
 
 
 void ASLBaseCharacter::MoveRight(float Amount)
 {
-	if(Amount == 0.0f) return;
-	AddMovementInput(GetActorRightVector(),Amount);
+	if (Amount == 0.0f) return;
+	AddMovementInput(GetActorRightVector(), Amount);
 }
 
 void ASLBaseCharacter::LookUp(float Amount)
@@ -128,7 +119,6 @@ void ASLBaseCharacter::TurnAround(float Amount)
 
 void ASLBaseCharacter::OnStartRunning()
 {
-
 	WantsToRun = true;
 }
 
@@ -144,12 +134,12 @@ bool ASLBaseCharacter::IsRunning() const
 
 float ASLBaseCharacter::GetMovementDirection() const
 {
-	if(GetVelocity().IsZero()) return 0.0f;
+	if (GetVelocity().IsZero()) return 0.0f;
 	const auto VelocityNormal = GetVelocity().GetSafeNormal();
-	const auto AngleBetween = FMath::Acos(FVector::DotProduct(GetActorForwardVector(),VelocityNormal));
+	const auto AngleBetween = FMath::Acos(FVector::DotProduct(GetActorForwardVector(), VelocityNormal));
 	const auto CrossProduct = FVector::CrossProduct(GetActorForwardVector(), VelocityNormal);
 	const auto Degrees = FMath::RadiansToDegrees(AngleBetween);
-	return CrossProduct.IsZero()? Degrees: Degrees *FMath::Sign(CrossProduct.Z);
+	return CrossProduct.IsZero() ? Degrees : Degrees * FMath::Sign(CrossProduct.Z);
 }
 
 void ASLBaseCharacter::OnDeath()
@@ -162,23 +152,20 @@ void ASLBaseCharacter::OnDeath()
 
 	SetLifeSpan(5.0f);
 
-	if(Controller)
+	if (Controller)
 	{
 		Controller->ChangeState(NAME_Spectating);
 	}
 	GetCapsuleComponent()->SetCollisionResponseToChannels(ECollisionResponse::ECR_Ignore);
+	WeaponComponent->StopFire();
 }
 
 void ASLBaseCharacter::OnGroundLanded(const FHitResult& Hit)
 {
 	const auto FallVelocityZ = -GetCharacterMovement()->Velocity.Z;
 
-	if(FallVelocityZ < LandedDamageVelocity.X) return;
+	if (FallVelocityZ < LandedDamageVelocity.X) return;
 
-	const auto FinalDamage = FMath::GetMappedRangeValueClamped(LandedDamageVelocity,LandedDamage,FallVelocityZ);
-	TakeDamage(FinalDamage, FDamageEvent{},nullptr,nullptr);
+	const auto FinalDamage = FMath::GetMappedRangeValueClamped(LandedDamageVelocity, LandedDamage, FallVelocityZ);
+	TakeDamage(FinalDamage, FDamageEvent{}, nullptr, nullptr);
 }
-
-
-
-

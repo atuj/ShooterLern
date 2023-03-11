@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Blueprint/UserWidget.h"
 #include "GameFramework/HUD.h"
 #include "SLGameHUD.generated.h"
 
@@ -16,7 +17,13 @@ class SHOOTERLERN_API ASLGameHUD : public AHUD
 	
 public:
 	virtual void DrawHUD() override;
-private:
+
+protected:
+	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite,Category = "UI")
+	TSubclassOf<UUserWidget> PlayerHUDWidgetClass;
+
+	virtual void BeginPlay() override;
+	
 	void DrawCrossHair();
 	
 	
