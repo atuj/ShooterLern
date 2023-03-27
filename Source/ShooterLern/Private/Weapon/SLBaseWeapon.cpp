@@ -7,6 +7,8 @@
 #include "DrawDebugHelpers.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/Controller.h"
+#include "..\..\..\..\..\UE5\UE_5.0\Engine\Plugins\FX\Niagara\Source\Niagara\Public\NiagaraFunctionLibrary.h"
+#include "..\..\..\..\..\UE5\UE_5.0\Engine\Plugins\FX\Niagara\Source\Niagara\Public\NiagaraComponent.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogBaseWeapon, All, All);
 
@@ -50,9 +52,23 @@ APlayerController* ASLBaseWeapon::GetPlayerController() const
 
 bool ASLBaseWeapon::GetPlayerViewPoint(FVector& ViewLocation, FRotator& ViewRotation) const
 {
-	const auto Controller = GetPlayerController();
-	if (!Controller) return false;
-	Controller->GetPlayerViewPoint(ViewLocation, ViewRotation);
+
+	const auto SLCharacter = Cast<ACharacter>(GetOwner());
+	if(!SLCharacter) return false;
+
+	if(SLCharacter->IsPlayerControlled())
+	{
+		const auto Controller = GetPlayerController();
+		if (!Controller) return false;
+		Controller->GetPlayerViewPoint(ViewLocation, ViewRotation);
+	}
+	else
+	{
+		ViewLocation = GetMuzzleWorldLocation();
+		ViewRotation = WeaponMesh->GetSocketRotation(MuzzleSocketName);
+	}
+	
+	
 	return true;
 }
 
@@ -167,5 +183,12 @@ bool ASLBaseWeapon::TryToAddAmmo(int32 ClipsAmount)
 	}
 	return true;
 }
+
+UNiagaraComponent* ASLBaseWeapon::SpawnMuzzleFX()
+{
+	return UNiagaraFunctionLibrary::SpawnSystemAttached(MuzzleFX,WeaponMesh,MuzzleSocketName,FVector::ZeroVector,FRotator::ZeroRotator,EAttachLocation::SnapToTarget,true);
+	
+}
+
 
 

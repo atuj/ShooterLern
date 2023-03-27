@@ -258,3 +258,15 @@ bool USLWeaponsComponent::TryToAddAmmo(TSubclassOf<ASLBaseWeapon> WeaponType, in
 	}
 	return false;
 }
+
+bool USLWeaponsComponent::NeedAmmo(TSubclassOf<ASLBaseWeapon> WeaponType)
+{
+	for(const auto Weapon: Weapons)
+	{
+		if(Weapon && Weapon->IsA(WeaponType))
+		{
+			return !Weapon->IsAmmoFull();
+		}
+	}
+	return false;
+}

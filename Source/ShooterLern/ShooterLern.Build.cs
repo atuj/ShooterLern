@@ -8,7 +8,7 @@ public class ShooterLern : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "NavigationSystem", "UMG", "AIModule", "Niagara","PhysicsCore"  });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "GameplayTasks","NavigationSystem", "UMG", "AIModule", "Niagara","PhysicsCore"  });
 
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{

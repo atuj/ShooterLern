@@ -11,6 +11,7 @@
 #include "Components/SLHealthComponent.h"
 #include "Components/TextRenderComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/Controller.h"
 #include "Components/SLWeaponsComponent.h"
 
@@ -49,15 +50,16 @@ void ASLBaseCharacter::BeginPlay()
 	check(HealthComponent);
 	check(HealthTextComponent);
 	check(GetCharacterMovement());
+	check(GetMesh());
 
-	OnHealthChange(HealthComponent->GetHealth());
+	OnHealthChange(HealthComponent->GetHealth(),0.0f);
 	HealthComponent->OnDeath.AddUObject(this, &ASLBaseCharacter::OnDeath);
 	HealthComponent->OnHealthChange.AddUObject(this, &ASLBaseCharacter::OnHealthChange);
 
 	LandedDelegate.AddDynamic(this, &ASLBaseCharacter::OnGroundLanded);
 }
 
-void ASLBaseCharacter::OnHealthChange(float Health)
+void ASLBaseCharacter::OnHealthChange(float Health, float HealthDelta)
 {
 	HealthTextComponent->SetText(FText::FromString(FString::Printf(TEXT("%.0f"), Health)));
 }
@@ -146,7 +148,7 @@ void ASLBaseCharacter::OnDeath()
 {
 	UE_LOG(LogBaseCharacter, Display, TEXT("Player %s is death"), *GetName());
 
-	PlayAnimMontage(DeathAnimMontage);
+	//PlayAnimMontage(DeathAnimMontage);
 
 	GetCharacterMovement()->DisableMovement();
 
@@ -158,6 +160,9 @@ void ASLBaseCharacter::OnDeath()
 	}
 	GetCapsuleComponent()->SetCollisionResponseToChannels(ECollisionResponse::ECR_Ignore);
 	WeaponComponent->StopFire();
+
+	GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	GetMesh()->SetSimulatePhysics(true);
 }
 
 void ASLBaseCharacter::OnGroundLanded(const FHitResult& Hit)

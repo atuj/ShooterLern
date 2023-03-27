@@ -60,7 +60,7 @@ void ASLProjectile::OnProjectileHit(UPrimitiveComponent* HitComponent, AActor* O
 	                                    nullptr, //
 	                                    DoFullDamage);
 
-	DrawDebugSphere(GetWorld(), GetActorLocation(), DamageRadius, 24, FColor::Blue, false, 5.0f);
+	//DrawDebugSphere(GetWorld(), GetActorLocation(), DamageRadius, 24, FColor::Blue, false, 5.0f);
 	WeaponFXComponent->PlayImpactFX(Hit);
 	Destroy();
 }

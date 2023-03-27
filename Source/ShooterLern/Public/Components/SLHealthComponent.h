@@ -7,6 +7,8 @@
 #include "SLCoreTypes.h"
 #include "SLHealthComponent.generated.h"
 
+class UCameraShakeBase;
+
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class SHOOTERLERN_API USLHealthComponent : public UActorComponent
 {
@@ -56,6 +58,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Heal", meta=(EditCondition = "AutoHeal"))
 	float HealModifier = 5.0f;
 
+	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite,Category = "VFX")
+	TSubclassOf<UCameraShakeBase> CameraShake;
+
 
 	virtual void BeginPlay() override;
 
@@ -72,4 +77,6 @@ private:
 	void HealUpdate();
 
 	void SetHealth(float NewHealth);
+
+	void PlayCameraShake();
 };

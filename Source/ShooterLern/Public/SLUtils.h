@@ -4,7 +4,7 @@ class SLUtils
 {
 public:
 	template <typename T>
-	static T* GetSLPlayerComponent(APawn* PlayerPawn)
+	static T* GetSLPlayerComponent(AActor* PlayerPawn)
 	{
 		if(!PlayerPawn) return nullptr;
 		const auto Component = PlayerPawn->GetComponentByClass(T::StaticClass());

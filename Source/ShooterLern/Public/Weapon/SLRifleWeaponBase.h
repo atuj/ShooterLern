@@ -8,6 +8,8 @@
 
 
 class USLWeaponFXComponent;
+class UNiagaraComponent;
+class UNiagaraSystem;
 
 UCLASS()
 class SHOOTERLERN_API ASLRifleWeaponBase : public ASLBaseWeapon
@@ -28,6 +30,13 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Weapon")
 	float DamageAmount = 10.0f;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="VFX")
+	UNiagaraSystem* TraceFX;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="VFX")
+	FString TraceTargetName = "TraceTarget";
+	
 
 	UPROPERTY(VisibleAnywhere, Category="VFX")
 	USLWeaponFXComponent* WeaponFXComponent;
@@ -39,5 +48,11 @@ protected:
 private:
 	FTimerHandle ShotTimerHandle;
 
+	UPROPERTY()
+	UNiagaraComponent* MuzzleFXComponent;
+	
 	void MakeDamage(const FHitResult& HitResult);
+	void InitMuzzleFX();
+	void SetMuzzleFXVisibility(bool Visibility);
+	void SpawnTraceFX(const FVector& TraceStart,const FVector& TraceEnd);
 };

@@ -5,9 +5,12 @@
 #include "Engine/World.h"
 #include "DrawDebugHelpers.h"
 #include "Weapon/Components/SLWeaponFXComponent.h"
+#include "..\..\..\..\..\UE5\UE_5.0\Engine\Plugins\FX\Niagara\Source\Niagara\Public\NiagaraComponent.h"
+#include "..\..\..\..\..\UE5\UE_5.0\Engine\Plugins\FX\Niagara\Source\Niagara\Public\NiagaraFunctionLibrary.h"
 
 void ASLRifleWeaponBase::StartFire()
 {
+	InitMuzzleFX();
 	GetWorldTimerManager().SetTimer(ShotTimerHandle, this, &ASLRifleWeaponBase::MakeShot, TimerBetweenShots, true);
 	MakeShot();
 }
@@ -20,6 +23,7 @@ ASLRifleWeaponBase::ASLRifleWeaponBase()
 void ASLRifleWeaponBase::StopFire()
 {
 	GetWorldTimerManager().ClearTimer(ShotTimerHandle);
+	SetMuzzleFXVisibility(false);
 }
 
 void ASLRifleWeaponBase::BeginPlay()
@@ -47,17 +51,17 @@ void ASLRifleWeaponBase::MakeShot()
 	FHitResult HitResult;
 	MakeHit(HitResult, TraceStart, TraceEnd);
 
+
+	FVector TraceFXEnd = TraceEnd;
 	if (HitResult.bBlockingHit)
 	{
+		TraceFXEnd = HitResult.ImpactPoint;
 		MakeDamage(HitResult);
 		//DrawDebugLine(GetWorld(), GetMuzzleWorldLocation(), HitResult.ImpactPoint, FColor::Red, false, 3.0f, 0, 3.0f);
 		//DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 10.0f, 24, FColor::Red, false, 5.0f);
 		WeaponFXComponent->PlayImpactFX(HitResult);
 	}
-	else
-	{
-		DrawDebugLine(GetWorld(), GetMuzzleWorldLocation(), TraceEnd, FColor::Red, false, 3.0f, 0, 3.0f);
-	};
+	SpawnTraceFX(GetMuzzleWorldLocation(),TraceFXEnd);
 	DecreaseAmmo();
 }
 
@@ -81,3 +85,32 @@ void ASLRifleWeaponBase::MakeDamage(const FHitResult& HitResult)
 	if (!DamagedActor) return;
 	DamagedActor->TakeDamage(DamageAmount, FDamageEvent(), GetPlayerController(), this);
 }
+
+void ASLRifleWeaponBase::InitMuzzleFX()
+{
+	if(!MuzzleFXComponent)
+	{
+		MuzzleFXComponent=SpawnMuzzleFX();
+	}
+	SetMuzzleFXVisibility(true);
+}
+
+void ASLRifleWeaponBase::SetMuzzleFXVisibility(bool Visibility)
+{
+	if(MuzzleFXComponent)
+	{
+		MuzzleFXComponent->SetPaused(!Visibility);
+		MuzzleFXComponent->SetVisibility(Visibility,true);
+	}
+}
+
+void ASLRifleWeaponBase::SpawnTraceFX(const FVector& TraceStart, const FVector& TraceEnd)
+{
+	const auto TraceFXComponent = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(),TraceFX,TraceStart);
+	if(TraceFXComponent)
+	{
+		TraceFXComponent->SetNiagaraVariableVec3(TraceTargetName,TraceEnd);
+	}
+}
+
+

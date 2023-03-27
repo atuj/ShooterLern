@@ -53,6 +53,8 @@ protected:
 	
 	
 	virtual void BeginPlay() override;
+	
+	virtual void OnDeath();
 
 public:	
 	// Called every frame
@@ -81,8 +83,8 @@ private:
 	void OnStartRunning();
 	void OnStopRunning();
 
-	void OnDeath();
-	void OnHealthChange(float Health);
+	
+	void OnHealthChange(float Health, float HealthDelta);
 
 
 	UFUNCTION()
